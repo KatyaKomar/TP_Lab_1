@@ -7,7 +7,7 @@
 # Original author: User
 # 
 #######################################################
-import LineSegment
+from shapes.LineSegment import  LineSegment
 
 class Ray(LineSegment):
     def draw(self):
