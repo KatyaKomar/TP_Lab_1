@@ -8,8 +8,21 @@
 # 
 #######################################################
 from shapes.Ellipse import Ellipse
+from helpers.geometry import get_distance
 
 
 class Circle(Ellipse):
-    def draw(self):
-        pass
+    def __init__(self, border_color, inner_color, center_point, border_point):
+        super().__init__(
+            center_point=center_point,
+            border_color=border_color,
+            inner_color=inner_color,
+            left_point=border_point,
+            top_point=border_point
+        )
+
+    def draw(self, qp):
+        qp.setPen(self.pen)
+        qp.setBrush(self._inner_color)
+        radius = get_distance(self._center_point, self._left_point)
+        qp.drawEllipse(self._center_point, radius, radius)

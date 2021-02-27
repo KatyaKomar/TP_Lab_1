@@ -8,9 +8,15 @@
 # 
 #######################################################
 from shapes.Point import Point
+from helpers.constants import DefaultDrawParams
+from PyQt5.QtGui import QPen
 
 
 class Figure:
+    def __init__(self, center_point=None, border_color=DefaultDrawParams.pen_color):
+        self._center_point = center_point
+        self._border_color = border_color
+
     def draw(self):
         pass
 
@@ -31,3 +37,14 @@ class Figure:
 
     def set_point(self, point):
         pass
+
+    @property
+    def pen(self):
+        """create and return default pen"""
+        pen = QPen()
+        pen.setStyle(DefaultDrawParams.pen_style)
+        pen.setWidth(DefaultDrawParams.pen_thickness)
+        pen.setBrush(self._border_color)
+        pen.setCapStyle(DefaultDrawParams.pen_cap_style)
+        pen.setJoinStyle(DefaultDrawParams.pen_join_style)
+        return pen
