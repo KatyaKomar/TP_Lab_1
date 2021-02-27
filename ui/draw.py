@@ -46,7 +46,7 @@ class DrawArea(QWidget):
 
     def draw_figures(self, qp):
         for fig in self.figures:
-            fig.render(qp)
+            fig.draw(qp)
 
     def __is_enough_points(self, trigger_value):
         return len(self.points) == trigger_value
@@ -90,7 +90,7 @@ class DrawArea(QWidget):
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
                 center_point=self.points[0],
-                border_points=[self.points[1]]
+                border_point=self.points[1]
             )
         return figure
 
@@ -101,7 +101,8 @@ class DrawArea(QWidget):
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
                 center_point=self.points[0],
-                border_points=[self.points[1], self.points[2]]
+                left_point=self.points[1],
+                top_point=self.points[2],
             )
         return figure
 
@@ -131,7 +132,7 @@ class DrawArea(QWidget):
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
                 center_point=self.points[0],
-                border_points=[self.points[1]],
+                border_point=self.points[1],
                 num=self.parent.num
             )
         return figure
@@ -204,7 +205,7 @@ class DrawArea(QWidget):
             FigureLabels.section_label: self._section_processor,
             FigureLabels.line_label: self._line_processor,
             FigureLabels.ray_label: self._ray_processor,
-            FigureLabels.broken_line_label: self._brokenline_processor,
+            FigureLabels.broken_line_label: self._broken_line_processor,
             FigureLabels.regular_polygon_label: self._regular_processor,
             FigureLabels.polygon_label: self._polygon_processor,
             FigureLabels.circle_label: self._circle_processor,

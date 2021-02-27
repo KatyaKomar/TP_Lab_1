@@ -7,15 +7,45 @@
 # Original author: User
 # 
 #######################################################
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QPolygon
+
 from shapes.CloseFigure import CloseFigure
 
 
 class Polygon(CloseFigure):
-    def draw(self):
-        pass
 
-    def get_points(self):
-        pass
+    def __init__(self, border_color, inner_color, border_points):
+        super().__init__(
+            center_point=self.__calculate_center(border_points),
+            border_color=border_color,
+            inner_color=inner_color,
+        )
+        self._border_points = border_points
 
-    def set_points(self, points):
-        pass
+    border_points = property()
+
+    @border_points.getter
+    def border_points(self):
+        return self._border_points
+
+    @border_points.setter
+    def border_points(self, value):
+        self._border_points = value
+
+    def move(self, shift):
+        self.center_point += shift
+        for point in self.border_points:
+            point += shift
+
+    @staticmethod
+    def __calculate_center(border_points):
+        result_point = QPoint(0, 0)
+        for point in border_points:
+            result_point += point
+        return result_point / len(border_points)
+
+    def draw(self, qp):
+        qp.setPen(self.pen)
+        qp.setBrush(self.inner_color)
+        qp.drawPolygon(QPolygon(self.border_points))

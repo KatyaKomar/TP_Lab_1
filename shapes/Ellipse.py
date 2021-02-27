@@ -7,22 +7,49 @@
 # Original author: User
 # 
 #######################################################
-from shapes.CloseFigure import CloseFigure
 from shapes.Point import Point
+from helpers.geometry import get_distance
+from shapes.CloseFigure import CloseFigure
 
 
 class Ellipse(CloseFigure):
-    def draw(self):
-        pass
 
-    def get_left_point(self) -> Point:
-        pass
+    def __init__(self, border_color, inner_color, center_point, left_point, top_point):
+        super().__init__(
+            center_point=center_point,
+            border_color=border_color,
+            inner_color=inner_color,
+        )
+        self._left_point = left_point
+        self._top_point = top_point
 
-    def get_top_point(self) -> Point:
-        pass
+    def draw(self, qp):
+        qp.setPen(self.pen)
+        qp.setBrush(self._inner_color)
+        radius_x = get_distance(self.center_point, self.left_point)
+        radius_y = get_distance(self.center_point, self.top_point)
+        qp.drawEllipse(self._center_point, radius_x, radius_y)
 
-    def set_left_point(self, point: Point):
-        pass
+    def move(self, shift):
+        self.center_point += shift
+        self.left_point += shift
+        self.top_point += shift
 
-    def set_top_point(self, point: Point):
-        pass
+    left_point = property()
+    top_point = property()
+
+    @left_point.getter
+    def left_point(self):
+        return self._left_point
+
+    @left_point.setter
+    def left_point(self, value):
+        self._left_point = value
+
+    @top_point.getter
+    def top_point(self):
+        return self._top_point
+
+    @top_point.setter
+    def top_point(self, value):
+        self._top_point = value

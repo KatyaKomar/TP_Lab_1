@@ -7,14 +7,40 @@
 # Original author: User
 # 
 #######################################################
+from math import cos, sin, pi, atan
+
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QPolygon
+
+from helpers.geometry import get_distance
 from shapes.Polygon import Polygon
 
+
 class RegularPolygon(Polygon):
-    def draw(self):
-        pass
 
-    def get_number_of_sides(self) -> int:
-        pass
+    def __init__(
+            self, center_point, border_point, num, border_color=None, inner_color=None
+    ):
+        super().__init__(
+            border_color=border_color,
+            inner_color=inner_color,
+            border_points=self._prepare_points(num, center_point, border_point),
+        )
 
-    def set_number_of_sides(number : int):
-        pass
+    def _prepare_points(self, num, center_point, border_point):
+        border_points = [border_point, ]
+        r = get_distance(border_point, center_point)
+        alpha = atan(
+            (border_point.y() - center_point.y()) / (border_point.x() - center_point.x())
+        )
+        for i in range(1, num):
+            x = r * cos(2.0 * pi * i / num + alpha) + center_point.x()
+            y = r * sin(2.0 * pi * i / num + alpha) + center_point.y()
+            point = QPoint(x, y)
+            border_points.append(point)
+        return border_points
+
+    def draw(self, qp):
+        qp.setPen(self.pen)
+        qp.setBrush(self.inner_color)
+        qp.drawPolygon(QPolygon(self.border_points))
