@@ -7,12 +7,13 @@
 # Original author: User
 # 
 #######################################################
-from shapes.CloseFigure import CloseFigure
 from shapes.Point import Point
 from helpers.geometry import get_distance
+from shapes.CloseFigure import CloseFigure
 
 
 class Ellipse(CloseFigure):
+
     def __init__(self, border_color, inner_color, center_point, left_point, top_point):
         super().__init__(
             center_point=center_point,
@@ -29,14 +30,26 @@ class Ellipse(CloseFigure):
         radius_y = get_distance(self._center_point, self._top_point)
         qp.drawEllipse(self._center_point, radius_x, radius_y)
 
-    def get_left_point(self) -> Point:
-        pass
+    def move(self, shift):
+        self.center_point += shift
+        self.left_point += shift
+        self.top_point += shift
 
-    def get_top_point(self) -> Point:
-        pass
+    left_point = property()
+    top_point = property()
 
-    def set_left_point(self, point: Point):
-        pass
+    @left_point.getter
+    def left_point(self):
+        return self._left_point
 
-    def set_top_point(self, point: Point):
-        pass
+    @left_point.setter
+    def left_point(self, value):
+        self._left_point = value
+
+    @top_point.getter
+    def top_point(self):
+        return self._top_point
+
+    @top_point.setter
+    def top_point(self, value):
+        self._top_point = value

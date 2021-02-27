@@ -12,6 +12,7 @@ from helpers.geometry import get_distance
 
 
 class Circle(Ellipse):
+
     def __init__(self, border_color, inner_color, center_point, border_point):
         super().__init__(
             center_point=center_point,

@@ -7,10 +7,13 @@
 # Original author: User
 # 
 #######################################################
+from abc import ABC
+
 from shapes.Figure import Figure
 from helpers.constants import DefaultDrawParams
 
-class CloseFigure(Figure):
+
+class CloseFigure(Figure, ABC):
 
     def __init__(self, center_point, border_color, inner_color=DefaultDrawParams.inner_color):
         super().__init__(center_point, border_color)

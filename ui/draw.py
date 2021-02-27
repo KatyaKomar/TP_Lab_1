@@ -227,7 +227,6 @@ class DrawArea(QWidget):
             raise KeyError(PAINT_ERROR_MSG)
 
         try:
-            pass
             figure = figure_processor(
                 border_color=self.border_color,
                 inner_color=self.inner_color,

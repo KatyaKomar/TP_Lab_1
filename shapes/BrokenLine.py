@@ -11,7 +11,6 @@ from shapes.LineSegment import LineSegment
 
 
 class BrokenLine:
-    m_LineSegment = LineSegment()
 
     def draw(self):
         pass
