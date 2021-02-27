@@ -132,7 +132,7 @@ class DrawArea(QWidget):
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
                 center_point=self.points[0],
-                border_points=[self.points[1]],
+                border_point=self.points[1],
                 num=self.parent.num
             )
         return figure
