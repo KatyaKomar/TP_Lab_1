@@ -26,8 +26,8 @@ class Ellipse(CloseFigure):
     def draw(self, qp):
         qp.setPen(self.pen)
         qp.setBrush(self._inner_color)
-        radius_x = get_distance(self._center_point, self._left_point)
-        radius_y = get_distance(self._center_point, self._top_point)
+        radius_x = get_distance(self.center_point, self.left_point)
+        radius_y = get_distance(self.center_point, self.top_point)
         qp.drawEllipse(self._center_point, radius_x, radius_y)
 
     def move(self, shift):
