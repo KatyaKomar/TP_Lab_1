@@ -7,9 +7,22 @@
 # Original author: User
 # 
 #######################################################
-import Quadrilateral
+from PyQt5.QtCore import QPoint
+
+from shapes.Polygon import Polygon
 
 
-class Rhombus(Quadrilateral):
-    def draw(self):
-        pass
+class Rhombus(Polygon):
+
+    def __init__(
+            self, top_point, left_point, border_color=None, inner_color=None
+    ):
+        super().__init__(
+            border_color=border_color,
+            inner_color=inner_color,
+            border_points=[
+                top_point, left_point,
+                QPoint(top_point.x(), 2 * left_point.y() - top_point.y()),
+                QPoint(2 * top_point.x() - left_point.x(), left_point.y())
+            ]
+        )

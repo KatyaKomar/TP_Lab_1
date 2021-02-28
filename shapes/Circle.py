@@ -7,6 +7,8 @@
 # Original author: User
 # 
 #######################################################
+from PyQt5.QtCore import QPoint
+
 from shapes.Ellipse import Ellipse
 from helpers.geometry import get_distance
 
@@ -18,8 +20,8 @@ class Circle(Ellipse):
             center_point=center_point,
             border_color=border_color,
             inner_color=inner_color,
-            left_point=border_point,
-            top_point=border_point
+            left_point=QPoint(border_point.x(), border_point.y()),
+            top_point=QPoint(border_point.x(), border_point.y())
         )
 
     def draw(self, qp):
