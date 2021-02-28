@@ -7,8 +7,21 @@
 # Original author: User
 # 
 #######################################################
-import Quadrilateral
+from PyQt5.QtCore import QPoint
 
-class Rectangle(Quadrilateral):
-    def draw(self):
-        pass
+from shapes.Polygon import Polygon
+
+
+class Rectangle(Polygon):
+
+    def __init__(
+            self, left_bottom_point, right_upper_point, border_color=None, inner_color=None
+    ):
+        super().__init__(
+            border_color=border_color,
+            inner_color=inner_color,
+            border_points=[
+                left_bottom_point, QPoint(left_bottom_point.x(), right_upper_point.y()),
+                right_upper_point, QPoint(right_upper_point.x(), left_bottom_point.y())
+            ]
+        )

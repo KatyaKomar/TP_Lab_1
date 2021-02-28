@@ -8,7 +8,6 @@
 # 
 #######################################################
 from shapes.Figure import Figure
-from shapes.Point import Point
 from abc import ABC
 from helpers.geometry import midpoint
 
@@ -19,7 +18,7 @@ class OpenFigure(Figure, ABC):
     There are no inner area or inner color.
     We have only two points to determine figure position.
     """
-    def __init__(self, border_color=None, start_point=0, end_point=0):
+    def __init__(self, border_color, start_point, end_point):
         # NOTE: we should also recalculate center_point
         # every time we update start point or end point
         center_point = midpoint(start_point, end_point)

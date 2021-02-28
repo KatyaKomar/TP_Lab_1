@@ -11,7 +11,9 @@ from shapes.Line import Line
 from shapes.LineSegment import LineSegment
 from shapes.Polygon import Polygon
 from shapes.Ray import Ray
+from shapes.Rectangle import Rectangle
 from shapes.RegularPolygon import RegularPolygon
+from shapes.Rhombus import Rhombus
 
 
 class DrawArea(QWidget):
@@ -161,13 +163,11 @@ class DrawArea(QWidget):
         figure = None
         if self.__is_enough_points(2):
             fir, sec = self.points
-            figure = Polygon(
+            figure = Rectangle(
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
-                border_points=[
-                    fir, QPoint(fir.x(), sec.y()),
-                    sec, QPoint(sec.x(), fir.y())
-                ]
+                left_bottom_point=fir,
+                right_upper_point=sec,
             )
         return figure
 
@@ -175,14 +175,11 @@ class DrawArea(QWidget):
         figure = None
         if self.__is_enough_points(2):
             fir, sec = self.points
-            figure = Polygon(
+            figure = Rhombus(
                 border_color=kwargs.get('border_color'),
                 inner_color=kwargs.get('inner_color'),
-                border_points=[
-                    fir, sec,
-                    QPoint(fir.x(), 2 * sec.y() - fir.y()),
-                    QPoint(2 * fir.x() - sec.x(), sec.y())
-                ]
+                top_point=fir,
+                left_point=sec,
             )
         return figure
 
